@@ -1,1 +1,7 @@
 # SDE_Project
+
+LOGIN: TBD
+DATABASE: Leonardo
+“GREEN SERVICE”: Leonardo
+BUSINNES LOGIC: Riccardo
+USER INTERFACE: Riccardo
