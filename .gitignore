@@ -24,4 +24,4 @@ hs_err_pid*
 replay_pid*
 
 #config files
-
+\Coordinator\src\main\java\com\example\SDE\config.java
