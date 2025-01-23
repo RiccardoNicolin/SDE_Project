@@ -3,20 +3,13 @@ const API_URL = 'http://localhost:8080';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://localhost:8080';
 
 
-export const getUser = async (content) => {
-console.log("START GET USER");
-    await axios.get(`${API_URL}/getUser`, {
-        params: {
-            username: content.username,
-            password: content.password
-        }
-    })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+export const login = async (username, password) => {
+    try {
+        const response =await axios.post('http://localhost:8080/signin', { username, password });
+        sessionStorage.setItem('token', response.data.jwt);
+    } catch (error) {
+        console.error('Error logging in:', error);
+    }
 };
 
 export const saveData = async (content) => {

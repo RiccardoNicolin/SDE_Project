@@ -16,11 +16,10 @@ public class connection {
             String url = config.DB_URL;//link to db
             String user = config.DB_USER; //user to access DB
             String password = config.DB_PASSWORD; //Db password
-            System.out.println(url + " " + user + " " + password);
 
             // Establish the connection
             connection = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the PostgreSQL server successfully.");
+            //System.out.println("Connected to the PostgreSQL server successfully.");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

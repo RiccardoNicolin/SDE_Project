@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { getUser } from '../services/apiService';
+import axios from 'axios';
+import { login } from '../services/apiService';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        // Handle login logic here
-        console.log('Username:', username);
-        console.log('Password:', password);
+    const handleLogin = async () => {
+        console.log('LOGIN START');
         try {
-            const response = await getUser
+            if (username.length == 0 || password.length == 0) {
+                console.log('Inserire username e password');
+            }
+
+                else {
+
+            const response = await axios.post('http://localhost:8080/signin', { username, password });
             console.log('Login successful:', response);
-            sessionStorage.setItem('user', response.data);
+            sessionStorage.setItem('token', response.data.jwt);
             navigate('/test',);
+                }
         } catch (error) {
-            console.error('Login failed:', error);
+            console.error('Login failed:', error.response ? error.response.data : error.message);
         }
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: '300px' }}>
+        <div style={{ justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                 <h2>Login</h2>
                 <label>
                     Username:
@@ -44,8 +48,7 @@ const LoginPage = () => {
                         required
                     />
                 </label>
-                <button type="submit">Login</button>
-            </form>
+                <button onClick={handleLogin}>Login</button>
         </div>
     );
 };
