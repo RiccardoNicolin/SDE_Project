@@ -1,0 +1,1 @@
+{"image":"https://perenual.com/storage/species_image/2292_cyphomandra_betacea/og/49288036626_f4bfa5c8c5_b.jpg","watering":"Average","growing_degree_days":0,"name":"tree tomato","harvest_time":null,"cycle":"Perennial","sowing_method":null,"sun_requirements":null}
