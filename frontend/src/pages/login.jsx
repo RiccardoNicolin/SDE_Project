@@ -9,19 +9,19 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        console.log('LOGIN START');
+
         try {
             if (username.length == 0 || password.length == 0) {
                 console.log('Inserire username e password');
             }
 
-                else {
-
-            const response = await axios.post('http://localhost:8080/signin', { username, password });
-            console.log('Login successful:', response);
-            sessionStorage.setItem('token', response.data.jwt);
-            navigate('/test',);
-                }
+            else {
+                console.log('LOGIN START');
+                const response = await axios.post('http://localhost:8080/api/users/login', {username, password });
+                console.log('Login successful:', response);
+                sessionStorage.setItem('token', response.data.token);
+                navigate('/test',);
+            }
         } catch (error) {
             console.error('Login failed:', error.response ? error.response.data : error.message);
         }
@@ -29,26 +29,26 @@ const LoginPage = () => {
 
     return (
         <div style={{ justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <h2>Login</h2>
-                <label>
-                    Username:
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Password:
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </label>
-                <button onClick={handleLogin}>Login</button>
+            <h2>Login</h2>
+            <label>
+                Username:
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
+            </label>
+            <label>
+                Password:
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+            </label>
+            <button onClick={handleLogin}>Login</button>
         </div>
     );
 };

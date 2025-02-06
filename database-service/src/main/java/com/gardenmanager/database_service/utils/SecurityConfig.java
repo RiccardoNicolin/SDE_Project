@@ -2,6 +2,7 @@ package com.gardenmanager.database_service.utils;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,14 +16,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf((csrf) -> csrf.disable())
-            .authorizeHttpRequests(autorize -> autorize
+                .csrf((csrf) -> csrf.disable())
+                .authorizeHttpRequests(autorize -> autorize
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/users/login", "/api/users").permitAll() // Allow login & user registration
                 .requestMatchers("/api/plants/**").authenticated() // Allow authenticated users to access plants
                 .anyRequest().authenticated()) // Require authentication for other endpoints
-            .sessionManagement((session) -> session
+                .sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // No session, use JWT
-            .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

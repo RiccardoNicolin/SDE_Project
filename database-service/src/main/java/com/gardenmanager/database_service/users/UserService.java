@@ -10,6 +10,7 @@ import com.gardenmanager.database_service.utils.PasswordUtil;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -36,12 +37,14 @@ public class UserService {
     }
 
     public String authenticateUser(String username, String password) {
+        //System.out.println("authenticating user: " + username + " " + password);
         User user = userRepository.findByUsername(username);
         if (user == null || !PasswordUtil.verifyPassword(password, user.getPassword())) {
             throw new UserNotFoundException("Invalid username or password.");
         }
         return JwtUtil.generateToken(username);
     }
+
     public void deleteUser(int id) {
         userRepository.deleteById(id);
     }
