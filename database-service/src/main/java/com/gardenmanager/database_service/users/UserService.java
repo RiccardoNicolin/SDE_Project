@@ -1,5 +1,7 @@
 package com.gardenmanager.database_service.users;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +17,31 @@ public class UserService {
     private UserRepository userRepository;
 
     public User addUser(User user) {
+        Random rand = new Random();
         if (userRepository.findByUsername(user.getUsername()) != null) {
             throw new DuplicateUsernameException("Username '" + user.getUsername() + "' is already taken.");
         }
+
+        boolean loop = true;
+        while (loop) {
+            try {
+                getUserById(user.getId());
+                System.out.println("User with ID " + user.getId() + " already exists, calculating new ID...");
+                user.setId(rand.nextInt(1000)); //re-run until unique ID is found
+
+            } catch (Exception e) {
+                loop = false;
+            }
+
+        }
         // Hash password before saving
-        user.setPassword(PasswordUtil.hashPassword(user.getPassword()));
-        return userRepository.save(user);
+
+        String pass = PasswordUtil.hashPassword(user.getPassword());
+        user.setPassword(pass);
+        userRepository.InsertUser(user.getId(), user.getUsername(), pass);
+        userRepository.flush();
+        return user;
+        //return userRepository.saveAndFlush(user);
     }
 
     public User getUserById(int id) {

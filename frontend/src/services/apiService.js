@@ -22,3 +22,16 @@ export const fetchPlant = async (token, username) => {
         console.error('Error fetching plant data:', error);
     }
 };
+
+export const SignIn = async (username, password) => {
+    try {
+        let id = Math.floor(Math.random() * 100);
+        const response = await axios.post('http://localhost:8080/api/users', {id,  username, password });
+        console.log('Login successful:', response);
+        //sessionStorage.setItem('token', response.data.token);
+        return response;
+    }
+    catch (error) {
+        console.error('Login failed:', error.response ? error.response.data : error.message);
+    }
+};

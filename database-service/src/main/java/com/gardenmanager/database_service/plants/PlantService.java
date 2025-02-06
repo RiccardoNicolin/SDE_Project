@@ -35,7 +35,7 @@ public class PlantService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User with ID " + userId + " not found."));
 
-        List<Plant> plants = plantRepository.findByUser(userId);
+        List<Plant> plants = plantRepository.findByUser(user);
 
         // Ensure distinct plants are returned
         return plants.stream().distinct().collect(Collectors.toList());

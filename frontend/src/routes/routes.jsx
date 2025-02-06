@@ -6,6 +6,7 @@ import RouteGuard from "./RouteGuard.jsx"
 
 import Login from "../pages/login.jsx"
 import Test from "../pages/test.jsx"
+import SignInPage from "../pages/sign_in.jsx";
 
 
 function Routes() {
@@ -14,9 +15,14 @@ function Routes() {
             <Routes_react>
                 <Route path="/"
                     element={
-                        <Login />
+                        <SignInPage />
                     }
                 />
+                <Route path="/login"
+                    element={
+                        <Login />
+                    }
+                    />
                 <Route path="/test"
                     element={
                         <Test />

@@ -2,6 +2,7 @@ import React from 'react';
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from 'react';
 import { fetchPlant } from '../services/apiService';
+import LogoutButton from '../components/Logout_Button';
 
 const Test = () => {
     let token = sessionStorage.getItem("token");
@@ -25,7 +26,11 @@ const Test = () => {
 
     return (
         <div>
-           <p>Test {user}</p>
+           <h3>Benvenuto {user}</h3>
+            <LogoutButton />
+           {plantData == null ? <p>Nessuno Piante</p> : plantData.map((element) => <p key={element.id}> {element.plantname}</p>)}
+
+           <button>INSERISCI UNA NUOVA PIANTA</button>
         </div>
     );
 };

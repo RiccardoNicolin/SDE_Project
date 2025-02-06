@@ -13,8 +13,6 @@ public class PasswordUtil {
 
     // Verify password during login
     public static boolean verifyPassword(String rawPassword, String hashedPassword) {
-        //System.out.println(rawPassword + " " + hashedPassword);
-        //return encoder.matches(rawPassword, hashedPassword);
-        return rawPassword.equals(hashedPassword);
+        return encoder.matches(rawPassword, hashedPassword);
     }
 }

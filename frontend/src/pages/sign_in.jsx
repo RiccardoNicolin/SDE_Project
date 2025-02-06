@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { login } from '../services/apiService';
+import { SignIn } from '../services/apiService';
 
-const LoginPage = () => {
+const SignInPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -16,11 +16,11 @@ const LoginPage = () => {
             }
 
             else {
-                console.log('LOGIN START');
-                const response = await axios.post('http://localhost:8080/api/users/login', {username, password });
+                console.log('Start Sign In Process');
+                const response = await SignIn(username, password);
                 console.log('Login successful:', response);
                 sessionStorage.setItem('token', response.data.token);
-                navigate('/test',);
+                navigate('/login',);
             }
         } catch (error) {
             console.error('Login failed:', error.response ? error.response.data : error.message);
@@ -29,7 +29,7 @@ const LoginPage = () => {
 
     return (
         <div style={{ justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <h2>Login</h2>
+            <h2>Sign-In</h2>
             <label>
                 Username:
                 <input
@@ -48,11 +48,12 @@ const LoginPage = () => {
                     required
                 />
             </label>
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLogin}>Sign In</button>
             <hr />
-            <button onClick={() => navigate('/')}>Go to Sign In</button>
+            <button onClick={() => navigate('/login')}>Go to Login</button>
         </div>
+
     );
 };
 
-export default LoginPage;
+export default SignInPage;
