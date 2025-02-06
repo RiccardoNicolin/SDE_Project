@@ -6,7 +6,14 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gardenmanager.database_service.plants.Plant;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
@@ -28,6 +35,7 @@ public class User {
     @JsonIgnore // Prevents infinite recursion when serializing
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Plant> plants = new ArrayList<>();
+
     // Getters and setters
     public int getId() {
         return id;
@@ -56,7 +64,7 @@ public class User {
     public List<Plant> getPlants() {
         return plants;
     }
-    
+
     public void setPlants(List<Plant> plants) {
         this.plants = plants;
     }

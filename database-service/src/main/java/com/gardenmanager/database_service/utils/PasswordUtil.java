@@ -3,6 +3,7 @@ package com.gardenmanager.database_service.utils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordUtil {
+
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     // Hash password before storing in the database
@@ -12,6 +13,8 @@ public class PasswordUtil {
 
     // Verify password during login
     public static boolean verifyPassword(String rawPassword, String hashedPassword) {
-        return encoder.matches(rawPassword, hashedPassword);
+        //System.out.println(rawPassword + " " + hashedPassword);
+        //return encoder.matches(rawPassword, hashedPassword);
+        return rawPassword.equals(hashedPassword);
     }
 }
