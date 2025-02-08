@@ -8,6 +8,7 @@ import Login from "../pages/login.jsx"
 import Test from "../pages/test.jsx"
 import SignInPage from "../pages/sign_in.jsx";
 import NewPlant from "../pages/new_plant.jsx";
+import InfoPage from "../pages/info.jsx";
 
 
 function Routes() {
@@ -34,6 +35,12 @@ function Routes() {
                         <NewPlant />
                     }
                     />
+                    <Route path="/info"
+                    element={
+                        <RouteGuard>
+                            <InfoPage />
+                        </RouteGuard>
+                    }   />
 
             </Routes_react>
         </Router>

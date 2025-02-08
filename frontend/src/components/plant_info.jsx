@@ -3,7 +3,7 @@ import React from 'react';
 const PlantInfo = (info) => {
     let json = null
     if (info === null) {
-        return <p>No data</p>;
+        return ;
     } else {
         let stringy = JSON.stringify(info)
         stringy = stringy.replace(/info/g, 'info')

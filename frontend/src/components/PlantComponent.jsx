@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { jwtDecode } from 'jwt-decode';
@@ -8,6 +8,7 @@ import { SearchPlant } from '../services/apiService';
 import PlantInfo from './plant_info';
 
 const PlantComponent = ({ name, location, planted, estimate, plantId }) => {
+    const [plantData, setPlantData] = useState('');
     const navigate = useNavigate();
     const style = {
         border: '1px solid green',
@@ -44,19 +45,14 @@ const PlantComponent = ({ name, location, planted, estimate, plantId }) => {
     const handleInfo = async () => {
             try {
                 const response = await SearchPlant(name);
-                const plantInfo = response.data;
-
-                const popup = window.open('', 'Plant Info', 'width=600,height=400');
-                popup.document.write('<html><head><title>Plant Info</title></head><body></body></html>');
-                popup.document.body.appendChild(document.createElement('div')).setAttribute('id', 'plant-info');
-
-                ReactDOM.render(<PlantInfo {...plantInfo} />, popup.document.getElementById('plant-info'));
+               setPlantData(response);
             } catch (error) {
                 console.error('Error fetching plant info:', error);
             }
      };
 
     return (
+        <>
         <div style={{ ...style, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
                 <h5 style={{ display: 'inline', marginRight: '10px' }}>{name}</h5>
@@ -70,6 +66,14 @@ const PlantComponent = ({ name, location, planted, estimate, plantId }) => {
                 <button style={{ marginLeft: '10px' }} onClick={handleInfo}>INFO</button>
             </div>
         </div>
+        <div id="info">
+        {plantData ? (
+                <PlantInfo info={plantData} />
+            ) : (
+                <div></div>
+            )}
+        </div>
+        </>
     );
 };
 

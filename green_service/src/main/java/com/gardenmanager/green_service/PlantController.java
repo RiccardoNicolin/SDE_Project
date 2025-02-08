@@ -55,7 +55,7 @@ public class PlantController {
                     logger.info("OpenFarm Plant Details: {}", openFarmData);
     
                     // Extract important fields from Perenual
-                    String plantName = (String) openFarmData.get("common_name");
+                    String plantName = (String) perenualData.get("common_name");
                     String imageUrl = perenualData.get("default_image") != null
                             ? (String) ((Map<String, Object>) perenualData.get("default_image")).get("original_url")
                             : null;

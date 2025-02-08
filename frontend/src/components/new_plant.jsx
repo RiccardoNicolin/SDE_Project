@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SearchPlant } from '../services/apiService';
 import PlantInfo from './plant_info';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import { addPlantToUser } from '../services/apiService';
 
@@ -22,6 +23,7 @@ const NewPlantComp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log('Plant name:', plantName);
             const response = await SearchPlant(plantName);
             setPlantData(response);
         } catch (error) {
