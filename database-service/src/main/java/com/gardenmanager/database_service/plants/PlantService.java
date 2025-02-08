@@ -41,10 +41,27 @@ public class PlantService {
         return plants.stream().distinct().collect(Collectors.toList());
     }
 
+    public Plant getPlantById(int plantId) {
+        return plantRepository.findById(plantId)
+                .orElseThrow(() -> new PlantNotFoundException("Plant with ID " + plantId + " not found."));
+    }
+
     public void deletePlant(int plantId) {
         if (!plantRepository.existsById(plantId)) {
             throw new PlantNotFoundException("Plant with ID " + plantId + " not found.");
         }
         plantRepository.deleteById(plantId);
+    }
+
+    public Plant updatePlant(int plantId, Plant plant) {
+        Plant existingPlant = plantRepository.findById(plantId)
+                .orElseThrow(() -> new PlantNotFoundException("Plant with ID " + plantId + " not found."));
+
+        existingPlant.setPlantname(plant.getPlantname());
+        existingPlant.setPlace(plant.getPlace());
+        existingPlant.setStartTimeToHarvest(plant.getStartTimeToHarvest());
+        existingPlant.setEndTimeToHarvest(plant.getEndTimeToHarvest());
+
+        return plantRepository.save(existingPlant);
     }
 }

@@ -3,8 +3,17 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from 'react';
 import { fetchPlant } from '../services/apiService';
 import LogoutButton from '../components/Logout_Button';
+import PlantComponent from '../components/PlantComponent';
+import { useNavigate } from 'react-router-dom';
+import WeatherComp from '../components/weather_comp';
+import CompGeo from '../components/comp_geo';
 
 const Test = () => {
+    const navigate = useNavigate();
+    const handleNewPlant = () => {
+        navigate('/NewPlant');
+     };
+
     let token = sessionStorage.getItem("token");
     let user = jwtDecode(token).sub;
 
@@ -15,7 +24,7 @@ const Test = () => {
             try {
                 const data = await fetchPlant(token, user);
                 setPlantData(data);
-                console.log('Plant data:', data);
+                //console.log('Plant data:', data);
             } catch (error) {
                 console.error('Error fetching plant data:', error);
             }
@@ -28,9 +37,10 @@ const Test = () => {
         <div>
            <h3>Benvenuto {user}</h3>
             <LogoutButton />
-           {plantData == null ? <p>Nessuno Piante</p> : plantData.map((element) => <p key={element.id}> {element.plantname}</p>)}
+           {plantData == null ? <p>No saved plants</p> : plantData.map((element) => <PlantComponent name={element.plantname} location={element.place} planted={element.startTimeToHarvest} estimate={element.endTimeToHarvest} plantId={element.id}/>)}
 
-           <button>INSERISCI UNA NUOVA PIANTA</button>
+           <button onClick={handleNewPlant}>INSERISCI UNA NUOVA PIANTA</button>
+           <WeatherComp />
         </div>
     );
 };

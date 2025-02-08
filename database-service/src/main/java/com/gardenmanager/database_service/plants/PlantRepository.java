@@ -13,4 +13,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
     @Query("SELECT DISTINCT p FROM Plant p WHERE p.user = :user")
     List<Plant> findByUser(@Param("user") User user);
 
+    @Query("SELECT id FROM Plant p ORDER BY p.id DESC LIMIT 1")
+    Integer getLastId();
+
 }

@@ -50,7 +50,7 @@ const LoginPage = () => {
             </label>
             <button onClick={handleLogin}>Login</button>
             <hr />
-            <button onClick={() => navigate('/')}>Go to Sign In</button>
+            <button onClick={() => navigate('/SignIn')}>Go to Sign In</button>
         </div>
     );
 };

@@ -7,6 +7,7 @@ import RouteGuard from "./RouteGuard.jsx"
 import Login from "../pages/login.jsx"
 import Test from "../pages/test.jsx"
 import SignInPage from "../pages/sign_in.jsx";
+import NewPlant from "../pages/new_plant.jsx";
 
 
 function Routes() {
@@ -15,12 +16,12 @@ function Routes() {
             <Routes_react>
                 <Route path="/"
                     element={
-                        <SignInPage />
+                        <Login />
                     }
                 />
-                <Route path="/login"
+                <Route path="/SignIn"
                     element={
-                        <Login />
+                        <SignInPage />
                     }
                     />
                 <Route path="/test"
@@ -28,6 +29,11 @@ function Routes() {
                         <Test />
                     }
                 />
+                <Route path="/NewPlant"
+                    element={
+                        <NewPlant />
+                    }
+                    />
 
             </Routes_react>
         </Router>

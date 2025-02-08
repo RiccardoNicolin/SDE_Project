@@ -2,8 +2,10 @@ package com.gardenmanager.green_service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @RequestMapping("/plants")
 public class PlantController {
 
@@ -52,7 +55,7 @@ public class PlantController {
                     logger.info("OpenFarm Plant Details: {}", openFarmData);
     
                     // Extract important fields from Perenual
-                    String plantName = (String) perenualData.get("common_name");
+                    String plantName = (String) openFarmData.get("common_name");
                     String imageUrl = perenualData.get("default_image") != null
                             ? (String) ((Map<String, Object>) perenualData.get("default_image")).get("original_url")
                             : null;
@@ -66,6 +69,7 @@ public class PlantController {
                     String sunRequirements = (String) openFarmData.get("sun_requirements");
                     // Safely extract growing_degree_days
                     String gddString = (String) openFarmData.get("growing_degree_days");
+                    System.out.println("!!!!!!!!!" + gddString);
                     int growing_degree_days = (gddString != null && !gddString.isEmpty()) ? Integer.parseInt(gddString) : 0;
                     
                     // Construct response
