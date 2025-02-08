@@ -69,7 +69,6 @@ public class PlantController {
                     String sunRequirements = (String) openFarmData.get("sun_requirements");
                     // Safely extract growing_degree_days
                     String gddString = (String) openFarmData.get("growing_degree_days");
-                    System.out.println("!!!!!!!!!" + gddString);
                     int growing_degree_days = (gddString != null && !gddString.isEmpty()) ? Integer.parseInt(gddString) : 0;
                     
                     // Construct response

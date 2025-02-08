@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import { jwtDecode } from 'jwt-decode';
 import { PlantAPlant, deletePlant } from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import { searchPlant } from '../services/apiService';
+import PlantInfo from './PlantInfo';
 
 const PlantComponent = ({ name, location, planted, estimate, plantId }) => {
     const navigate = useNavigate();
@@ -38,7 +41,20 @@ const PlantComponent = ({ name, location, planted, estimate, plantId }) => {
         }
     };
 
-    const handleInfo = async () => { };
+    const handleInfo = async () => {
+            try {
+                const response = await searchPlant(name);
+                const plantInfo = response.data;
+
+                const popup = window.open('', 'Plant Info', 'width=600,height=400');
+                popup.document.write('<html><head><title>Plant Info</title></head><body></body></html>');
+                popup.document.body.appendChild(document.createElement('div')).setAttribute('id', 'plant-info');
+
+                ReactDOM.render(<PlantInfo {...plantInfo} />, popup.document.getElementById('plant-info'));
+            } catch (error) {
+                console.error('Error fetching plant info:', error);
+            }
+     };
 
     return (
         <div style={{ ...style, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
