@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import { jwtDecode } from 'jwt-decode';
 import { PlantAPlant, deletePlant } from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
-import { searchPlant } from '../services/apiService';
-import PlantInfo from './PlantInfo';
+import { SearchPlant } from '../services/apiService';
+import PlantInfo from './plant_info';
 
 const PlantComponent = ({ name, location, planted, estimate, plantId }) => {
     const navigate = useNavigate();
