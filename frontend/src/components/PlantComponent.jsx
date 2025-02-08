@@ -43,7 +43,7 @@ const PlantComponent = ({ name, location, planted, estimate, plantId }) => {
 
     const handleInfo = async () => {
             try {
-                const response = await searchPlant(name);
+                const response = await SearchPlant(name);
                 const plantInfo = response.data;
 
                 const popup = window.open('', 'Plant Info', 'width=600,height=400');
