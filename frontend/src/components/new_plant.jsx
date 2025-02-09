@@ -15,7 +15,7 @@ const NewPlantComp = () => {
     const addPlant = async () => { // Add plant to user's list
         let token = sessionStorage.getItem("token");
         let user = jwtDecode(token).sub;
-        const response = await addPlantToUser(plantData.name, user, token);
+        const response = await addPlantToUser(plantName, user, token);
         console.log('Plant added:', response);
         navigate("/test");
     };

@@ -39,7 +39,7 @@ const Test = () => {
             <LogoutButton />
            {plantData == null ? <p>No saved plants</p> : plantData.map((element) => <PlantComponent name={element.plantname} location={element.place} planted={element.startTimeToHarvest} estimate={element.endTimeToHarvest} plantId={element.id}/>)}
 
-           <button onClick={handleNewPlant}>INSERISCI UNA NUOVA PIANTA</button>
+           <button onClick={handleNewPlant}>INSERT A NEW PLANT</button>
            <WeatherComp />
         </div>
     );
