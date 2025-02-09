@@ -8,7 +8,7 @@ const LogoutButton = () => {
         // Remove the token from local storage
         sessionStorage.removeItem('token');
         // Redirect to the login page
-        navigate('/login');
+        navigate('/');
     };
 
     return (
