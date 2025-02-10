@@ -24,10 +24,6 @@ ctrl_c() {
         sudo kill $database_service_pid
     fi
 
-    if [ -n "$frontend_service_pid" ]; then
-        sudo kill $frontend_service_pid
-    fi
-
     echo "done."
     exit 0
 }
