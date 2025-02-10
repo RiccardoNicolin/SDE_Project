@@ -23,17 +23,6 @@ public class PerenualService {
         this.baseUrl = apiConfig.getPerenualApiUrl();
     }
 
-    // public Mono<Map<String, Object>> getPlantDetails(String query) {
-    //     return webClient.get()
-    //             .uri(uriBuilder -> uriBuilder
-    //                     .path("/species-list")
-    //                     .queryParam("key", apiKey)
-    //                     .queryParam("q", query)
-    //                     .build())
-    //             .retrieve()
-    //             .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {});
-    // }
-
     // First call: Search for the plant and get its ID
     public Mono<Integer> getPlantId(String query) {
         return webClient.get()
