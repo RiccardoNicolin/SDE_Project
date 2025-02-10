@@ -11,7 +11,7 @@ To run a demo of the application in your system do the following steps.
   ```shell
     . ./setup.sh <your_sql_username>
     ```
-* Run the demo.sh script
+* Run the demo.sh script (do this only at the first time you are trying the demo)
   ```shell
     . ./demo.sh
     ```
