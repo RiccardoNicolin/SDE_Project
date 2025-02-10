@@ -7,11 +7,11 @@ To run a demo of the application in your system do the following steps.
 * Clone the repository
 * Move to the demo directory
 * Run the setup.sh script with your mysql username
-      ```bash
+  ```shell
     . ./setup.sh <your_sql_username>
     ```
 * Run the demo.sh script
-      ```bash
+  ```shell
     . ./demo.sh
     ```
 * Navigate to http://localhost:3000
